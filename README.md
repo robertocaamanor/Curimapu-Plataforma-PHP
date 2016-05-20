@@ -1,20 +1,20 @@
-# Curimapu-Plataforma-PHP
+#### Curimapu-Plataforma-PHP
 Realización de plataforma para la Empresa de Semillas Curimapu de Chillan, usando PHP, Bootstrap, librerías de jQuery y CSS3
 
-# Realizado por
--Nieves Riffo
--Matias Carilao
--Roberto Caamaño
+#### Realizado por
+-Nieves Riffo<br>
+-Matias Carilao<br>
+-Roberto Caamaño<br>
 
-# Empresa
+#### Empresa
 -XHOST SpA
 
-# Cliente
+#### Cliente
 Empresa de Semillas Curimapu de Chillan
 
-# Librerías utilizadas
--PHPExcel
--PHP2PDF
--DateRangePicker
--Bootstrap
--jQuery
+#### Librerías utilizadas
+-PHPExcel<br>
+-PHP2PDF<br>
+-DateRangePicker<br>
+-Bootstrap<br>
+-jQuery<br>
