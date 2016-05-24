@@ -10,8 +10,8 @@ Realización de plataforma para la Empresa de Semillas Curimapu de Chillan, usan
 -XHOST SpA
 
 #### Cliente
-Empresa de Semillas Curimapu de Chillan<br>
-http://www.curimapu.com/semillas/
+Curimapu Vegetable Seeds<br>
+www.curimapu.com/vegetable
 
 #### Librerías utilizadas
 -PHPExcel<br>
