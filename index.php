@@ -17,8 +17,7 @@
 
 <form action="log_action.php" class="form" method="POST">
     <div class="avatar-form">
-        <img src="https://cambiardeimagen.files.wordpress.com/2014/01/a69fdebeff7296822e14c18e0f1cf056.jpg" alt="..."
-             class="img-circle">
+        <img src="http://i.imgur.com/XyMZ0m9.png" alt="...">
     </div>
     <div class="form-group">
         <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese su correo" required>
@@ -28,7 +27,7 @@
                required>
     </div>
     <div class="form-final">
-        <button type="submit" class="btn btn-primary btn-block">Iniciar sesion</button>
+        <button type="submit" class="btn btn-success btn-block">Iniciar sesion</button>
     </div>
     <div class="form-final"><a href="">¿Olvido su contraseña?</a></div>
 

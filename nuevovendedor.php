@@ -12,7 +12,7 @@ include 'includes/header.php';
 ?>
 
 <div class="panel-principal">
-    <div class="panel panel-default">
+    <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Nuevo vendedor</h3>
         </div>
@@ -66,7 +66,7 @@ include 'includes/header.php';
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-block">Listo!</button>
+                <button class="btn btn-success btn-block">Listo!</button>
             </form>
         </div>     
     </div>

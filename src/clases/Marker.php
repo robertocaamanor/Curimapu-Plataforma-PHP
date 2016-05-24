@@ -6,7 +6,7 @@
  * Date: 11/5/2016
  * Time: 09:26
  */
-include($_SERVER['DOCUMENT_ROOT'] . '\curimapuweb\src\functions\dbfunctions.php');
+include($_SERVER['DOCUMENT_ROOT'] . '\curimapu\src\functions\dbfunctions.php');
 
 class Marker
 {
@@ -41,10 +41,9 @@ class Marker
             $conn = connectDB();
             $result = query($conn,$sql);
 
-
             while ($row = mssql_fetch_array($result)) {
                 $marker = new Marker();
-                $date = date_format(new DateTime($row['Fecha']), 'd-m-y');
+                $date = date_format(new DateTime($row['Fecha']), 'y-m-d');
                 $locations = explode(',', $row['latlng']);
                 $marker->setFecha($date);
                 $marker->setVendedor($row['Vendedor']);

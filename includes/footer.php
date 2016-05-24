@@ -1,4 +1,4 @@
-
+<script src="js/jquery.min.js"></script>
 <script src="js/menu.js"></script>
 
 	
@@ -50,5 +50,6 @@
 		});
 	});
 	</script>
+	
 </body>
 </html>

@@ -6,14 +6,16 @@ body, html {
     overflow:hidden;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-    background: #EEEEEE;
+    background: #F5AB35;
 }
 
+body a {
+    color: #019875;
+}
 
-/*body {
-    background: #DADADA;
-    font-family: 'Roboto', sans-serif;
-}*/
+body a:hover {
+    color: #3FC380;
+}
 
 /* FORMULARIO */
 
@@ -64,13 +66,6 @@ body, html {
     color: #747474;
 }
 
-/*ESTILOS GENERALES*/
-
-/*body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;  
-}*/
-
 /* MENU */
 
 .sidebar {
@@ -79,6 +74,7 @@ body, html {
     position: absolute;
     background: #FFFFFF;
     font-weight: 500;
+    border-right: #00B16A;
 }
 
 .sidebar ul {
@@ -91,9 +87,9 @@ body, html {
     transition: all 0.3s;
 }
 
-.sidebar li:hover{
-    background: #DDDDDD;
-    border-left: 5px solid #7C7C7C;
+.sidebar li:hover {
+    background: #FDE3A7;
+    border-left: 5px solid #E87E04;
 }
 
 .sidebar li span {
@@ -103,9 +99,13 @@ body, html {
 
 .sidebar a{
     display: block;
-    color: #8A8A8A;
+    color: #D35400;
     text-decoration: none;
     padding: 10px;
+}
+
+.sidebar a:hover {
+    color: #D35400;
 }
 
 .sidebar .datos {
@@ -113,8 +113,7 @@ body, html {
 }
 
 .sidebar .datos img {
-    width: 30%;
-    height: 30%;
+    width: 75%;
 }
 
 .sidebar p {
@@ -125,7 +124,7 @@ body, html {
     width: 100%;
     height: 100%;
     position: absolute;
-    background: #F2F2F2;
+    background: #C8F7C5;
     padding: 30px;
     transition: all 0.3s;
     overflow: scroll;
@@ -137,7 +136,7 @@ body, html {
 
 .sitio-principal {
     margin: 0 auto;
-    width: 75%;
+    width: 90%;
 }
 
 .img-principal {

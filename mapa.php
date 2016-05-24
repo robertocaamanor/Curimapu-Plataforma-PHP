@@ -1,17 +1,21 @@
 <?php
-session_start(); 
-
-if(!isset($_SESSION['email'])) 
-  { 
-
-    echo "No tienes permiso para entrar a esta pagina"; 
-  } 
-  else 
-  {   
 include 'includes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/curimapu/src/clases/Marker.php';
 ?>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
+    #map {
+        height: 100%;
+    }
+</style>
 
 <div id="map"></div>
 <br>
@@ -60,7 +64,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
     }
         ?>
     }
-    $(document).ready(function() {
+    $(document).ready(function () {
         $.extend($.fn.dataTable.defaults, {
             searching: false,
             ordering: false
@@ -71,6 +75,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
             "processing": true
         });
     });
-    
 </script>
-<?php include 'includes/footer.php'; } ?>
+
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFMa4pd7uMEU0NRi7dHS7YVBcFQvKG5Ow&signed_in=true&callback=initMap"></script>
+<script src="js/menu.js"></script>
+</body>
+</html>

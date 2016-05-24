@@ -95,7 +95,7 @@ if(isset($_POST['inicio'],$_POST['final'])){
        if($primero){
         $compare = $date;
         $primero = 0;?>
-        <div class="panel panel-default">
+        <div class="panel panel-success">
           <div class="panel-heading">
             <h3 class="panel-title"><?php
             if($date == $hoy)
@@ -125,7 +125,7 @@ if(isset($_POST['inicio'],$_POST['final'])){
         $compare = $date?>
         </div>
         </div>
-         <div class="panel panel-default">
+         <div class="panel panel-success">
           <div class="panel-heading">
             <h3 class="panel-title"><?php echo $date ?></h3>
           </div>

@@ -92,7 +92,7 @@ if (!isset($_SESSION['email'])) {
     }
     ?>
 
-    <div class="panel panel-primary">
+    <div class="panel panel-success">
         <div class="panel-heading">
             <h3 class="panel-title">Informe visita cultivo</h3>
         </div>
@@ -258,10 +258,17 @@ if (!isset($_SESSION['email'])) {
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <img src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']); ?>" alt="Img" />
+                            </div>
+                        </div>
+                    </div>
                 </div><!--div formularioVenta -->
 
 
-                <button id="modificar" class="btn btn-primary">Modificar</button>
+                <button id="modificar" class="btn btn-success">Modificar</button>
                 <a href="informevisitapdf.php?id=<?php echo $id; ?>" class="btn btn-danger">Exportar PDF</a>
             </form>
         </div>

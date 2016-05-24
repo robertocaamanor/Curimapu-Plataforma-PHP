@@ -12,7 +12,6 @@
         rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/jquery-swipe-nav.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="js/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>    
     <script src="js/jquery.Rut.min.js" type="text/javascript"></script>
@@ -21,9 +20,6 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFMa4pd7uMEU0NRi7dHS7YVBcFQvKG5Ow&signed_in=true&callback=initMap"></script>
 <style>
     html, body {
         height: 100%;
@@ -57,6 +53,9 @@
 <body>
 
 <div class="sidebar">
+    <div class="datos">
+        <img src="http://i.imgur.com/5nfL0Mj.png" alt="">
+    </div>
     <ul>
         <li><a href="#" id="alternar-respuesta-ej2"><span class="glyphicon glyphicon-save"></span> Informes</a>
 
