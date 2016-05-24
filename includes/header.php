@@ -12,6 +12,7 @@
         rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/jquery-swipe-nav.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="js/jquery.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="js/bootstrap.min.js"></script>    
     <script src="js/jquery.Rut.min.js" type="text/javascript"></script>

@@ -1,6 +1,6 @@
 <?php
 include 'includes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/curimapu/src/clases/Marker.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
 <script type="text/javascript" charset="utf8"
@@ -40,7 +40,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapu/src/clases/Marker.php';
         <?php
         while (list(, $valor) = each($markers)) {
             echo " <tr>";
-            echo "<td>" . $valor->getFecha(). "</td>";
+            echo "<td>" . date_format($valor->getFecha(), 'Y-m-d') . "</td>";
             echo "<td>" . $valor->getVendedor() . "</td>";
             echo "<td>" . $valor->getUbicacion() . "</td>";
             echo " </tr>";
