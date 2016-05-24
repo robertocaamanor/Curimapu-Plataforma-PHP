@@ -19,3 +19,4 @@ http://www.curimapu.com/semillas/
 -DateRangePicker<br>
 -Bootstrap<br>
 -jQuery<br>
+-Google Static Maps API
