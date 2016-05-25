@@ -1,10 +1,17 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+
+    echo "No tienes permiso para entrar a esta pagina";
+} else {
 include 'includes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
 ?>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
 <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 <style>
     html, body {
         height: 100%;
@@ -40,7 +47,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
         <?php
         while (list(, $valor) = each($markers)) {
             echo " <tr>";
-            echo "<td>" . date_format($valor->getFecha(), 'Y-m-d') . "</td>";
+            echo "<td><a href='mapasearch.php?id=" . $valor->getId() . "'>" . date_format(new DateTime($valor->getFecha()), 'Y-m-d') . "</a></td>";
             echo "<td>" . $valor->getVendedor() . "</td>";
             echo "<td>" . $valor->getUbicacion() . "</td>";
             echo " </tr>";
@@ -66,12 +73,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
     }
     $(document).ready(function () {
         $.extend($.fn.dataTable.defaults, {
-            searching: false,
+            searching: true,
             ordering: false
         });
         $('#markers_table').DataTable({
             ordering: true,
-            paging: false,
+            paging: true,
             "processing": true
         });
     });
@@ -80,6 +87,4 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
 
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFMa4pd7uMEU0NRi7dHS7YVBcFQvKG5Ow&signed_in=true&callback=initMap"></script>
-<script src="js/menu.js"></script>
-</body>
-</html>
+<?php include 'includes/footer.php'; } ?>

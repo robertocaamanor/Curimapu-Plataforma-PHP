@@ -113,7 +113,7 @@ if(isset($_POST['inicio'],$_POST['final'])){
                       <img src="http://odontopekes.com/wp-content/uploads/2016/01/facebookanon.jpg" alt="" class="img-circle">
                   </div>
                   <div class="cuerpo-principal">
-                      <h4 class="list-group-item-heading">Agricultor:<?php echo $row['agricultor']; ?></h4>
+                      <h4 class="list-group-item-heading">Agricultor: <?php echo $row['agricultor']; ?></h4>
                       <p class="list-group-item-text"><b>Vendedor: <?php echo $row['usuario']; ?></b></p>
                       <p class="list-group-item-text"><b>Comentario: <?php echo $row['observacion']; ?></b></p>
                   </div>
@@ -137,7 +137,7 @@ if(isset($_POST['inicio'],$_POST['final'])){
                       <img src="http://odontopekes.com/wp-content/uploads/2016/01/facebookanon.jpg" alt="" class="img-circle">
                   </div>
                   <div class="cuerpo-principal">
-                      <h4 class="list-group-item-heading">Agricultor:<?php echo $row['agricultor']; ?></h4>
+                      <h4 class="list-group-item-heading">Agricultor: <?php echo $row['agricultor']; ?></h4>
                       <p class="list-group-item-text"><b>Vendedor: <?php echo $row['usuario']; ?></b></p>
                       <p class="list-group-item-text"><b>Comentario: <?php echo $row['observacion']; ?></b></p>
                   </div>

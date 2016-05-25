@@ -15,6 +15,7 @@ class Marker
     private $ubicacion;
     private $lat;
     private $lng;
+    private $id;
 
     /**
      * Marker constructor.
@@ -32,6 +33,7 @@ class Marker
         $markerList = array();
         try {
             $sql = ("select FormularioVenta_fecha as Fecha,
+                    FormularioVenta_id as Id,
                     Vendedor_nombre as Vendedor,
                     ubicacion as Ubicacion,
                     FormularioVenta.FormularioVenta_gps as latlng
@@ -46,6 +48,43 @@ class Marker
                 $date = date_format(new DateTime($row['fecha']), "Y-m-d");
                 $locations = explode(',', $row['latlng']);
                 $marker->setFecha($date);
+                $marker->setId($row['Id']);
+                $marker->setVendedor($row['Vendedor']);
+                $marker->setUbicacion($row['Ubicacion']);
+                $marker->setLat(trim($locations[0]));
+                $marker->setLng(trim($locations[1]));
+                array_push($markerList, $marker);
+            }
+
+            return ($markerList);
+        } catch (Exception $e) {
+            die(print_r(json_encode(), true));
+        }
+    }
+
+    public static function searchMarkers()
+    {
+        $markerList = array();
+        $id = $_GET['id'];
+        try {
+            $sql = ("select FormularioVenta_fecha as Fecha,
+                    FormularioVenta_id as Id,
+                    Vendedor_nombre as Vendedor,
+                    ubicacion as Ubicacion,
+                    FormularioVenta.FormularioVenta_gps as latlng
+                    from FormularioVenta
+                    left join Agricultor on FormularioVenta.Agricultor_id = Agricultor.Agricultor_id
+                    left join Vendedor on Vendedor_id=FormularioVenta.FormularioVenta_usuario
+                    where FormularioVenta_id = '$id'");
+            $conn = connectDB();
+            $result = query($conn,$sql);
+
+            while ($row = mssql_fetch_array($result)) {
+                $marker = new Marker();
+                $date = date_format(new DateTime($row['fecha']), "Y-m-d");
+                $locations = explode(',', $row['latlng']);
+                $marker->setFecha($date);
+                $marker->setId($row['Id']);
                 $marker->setVendedor($row['Vendedor']);
                 $marker->setUbicacion($row['Ubicacion']);
                 $marker->setLat(trim($locations[0]));
@@ -62,6 +101,18 @@ class Marker
     /**
      * @return mixed
      */
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
     public function getFecha()
     {
         return $this->fecha;

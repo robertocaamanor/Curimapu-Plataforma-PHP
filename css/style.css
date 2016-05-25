@@ -175,3 +175,9 @@ body a:hover {
 .formulario {
     padding-top: 10px;
 }
+
+/* TABLA */
+
+#markers_table {
+    background: #FFFFFF;
+}
