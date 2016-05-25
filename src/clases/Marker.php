@@ -45,7 +45,7 @@ class Marker
 
             while ($row = mssql_fetch_array($result)) {
                 $marker = new Marker();
-                $date = date_format(new DateTime($row['fecha']), "Y-m-d");
+                $date = date_format(new DateTime($row['Fecha']), "Y-m-d");
                 $locations = explode(',', $row['latlng']);
                 $marker->setFecha($date);
                 $marker->setId($row['Id']);
@@ -81,7 +81,7 @@ class Marker
 
             while ($row = mssql_fetch_array($result)) {
                 $marker = new Marker();
-                $date = date_format(new DateTime($row['fecha']), "Y-m-d");
+                $date = date_format(new DateTime($row['Fecha']), "Y-m-d");
                 $locations = explode(',', $row['latlng']);
                 $marker->setFecha($date);
                 $marker->setId($row['Id']);
