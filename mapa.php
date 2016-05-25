@@ -12,6 +12,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
         src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"></script>
 <style>
     html, body {
         height: 100%;

@@ -18,9 +18,9 @@ if (!empty($_POST)) {
             where FormularioVenta_id='".$_POST['formularioId']."'";
 
 
-    $recurso = mssql_prepare($con, $sql);
+    $recurso = mssql_query($sql, $con);
 
-    if (mssql_execute($recurso)) {
+    if ($recurso) {
         echo "Agregado correctamente";
     } else {
         echo "No Agregado";

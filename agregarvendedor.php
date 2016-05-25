@@ -13,11 +13,11 @@
 		 
 		//Te faltaba esta linea
 		 
-		$recurso=mssql_prepare($con, $sql);
+		$recurso=mssql_query($sql, $con);
 		 
 		//Para mas seguridad usa el valor retornado por sqlsrv_execute
 		 
-		if(mssql_execute($recurso)){
+		if($recurso){
 		      echo"Agregado correctamente";
 		}else{
 		      echo"No Agregado";

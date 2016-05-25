@@ -103,7 +103,6 @@ if (!isset($_SESSION['email'])) {
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="razonsocial">Razon Social</label>
-                                <input type="hidden" name="formularioId" value=" <?= $id; ?>">
                                 <input type="hidden" name="agricultorId" value="
                             <?= $row['agricultorid'] ?>"
                                        placeholder="Ingrese razon social">
@@ -152,9 +151,10 @@ if (!isset($_SESSION['email'])) {
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
+                            <input type="hidden" name="formularioId" value=" <?= $id; ?>">
                                 <label for="fecha">Fecha</label>
                                 <input type="text" name="fecha" class="form-control" placeholder="Ingrese fecha"
-                                       value="<?php echo date_format(new DateTime($row['fecha']), "d-m-Y"); ?>">
+                                       value="<?php echo date_format(new DateTime($row['fecha']), "Y-m-d"); ?>">
                             </div>
                         </div>
                         <div class="col-md-3">

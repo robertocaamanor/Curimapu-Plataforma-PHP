@@ -14,82 +14,6 @@ if (!isset($_SESSION['email'])) {
     $result = detalleVisita($id, $conn);
     $row = mssql_fetch_array($result);
     $errors = array();
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $razonsocial = $_POST['razonsocial'];
-        $agricultor = $_POST['agricultor'];
-//    $especie = $_POST['especie'];
-        $fecha = $_POST['fecha'];
-        $variedad = $_POST['variedad'];
-        $ubicacion = $_POST['ubicacion'];
-        $email = $_POST['email'];
-        $telefono = $_POST['telefono'];
-        $estadocrecimiento = $_POST['estadocrecimiento'];
-        $enfermedadesbacteriales = $_POST['enfermedadesbacteriales'];
-        $cultivo = $_POST['malezas'];
-        $humedad = $_POST['humedad'];
-        $plantaspormetro = $_POST['plantaspormetro'];
-        $enfermedadesfungosas = $_POST['enfermedadesfungosas'];
-        $insectos = $_POST['insectos'];
-        $observaciones = $_POST['observaciones'];
-        $recomendaciones = $_POST['recomendaciones'];
-
-        if (!$razonsocial) {
-            array_push($errors, 'Debe ingresar la razon social');
-        }
-        if (!$agricultor) {
-            array_push($errors, 'Debe ingresar el nombre del agricultor');
-        }
-//    if (!$especie) {
-//        array_push($errors, 'Debe ingresar el nombre de la especie');
-//    }
-        if (!$fecha) {
-            array_push($errors, 'Debe ingresar la fecha');
-        }
-        if (!$variedad) {
-            array_push($errors, 'Debe ingresar el nombre de la variedad');
-        }
-        if (!$ubicacion) {
-            array_push($errors, 'Debe ingresar la ubicación');
-        }
-        if (!$email) {
-            array_push($errors, 'Debe ingresar el email');
-        }
-        if (!$telefono) {
-            array_push($errors, 'Debe ingresar el telefono');
-        }
-        if (!$estadocrecimiento) {
-            array_push($errors, 'Debe ingresar el estado de crecimiento');
-        }
-        if (!$enfermedadesbacteriales) {
-            array_push($errors, 'Debe ingresar enfermedades bacteriales');
-        }
-        if (!$enfermedadesfungosas) {
-            array_push($errors, 'Debe ingresar enfermedades fungosas');
-        }
-        if (!$humedad) {
-            array_push($errors, 'Debe ingresar humedad');
-        }
-        if (!$plantaspormetro) {
-            array_push($errors, 'Debe ingresar plantas por metro');
-        }
-        if (!$enfermedadesfungosas) {
-            array_push($errors, 'Debe ingresar enfermedades fungosas');
-        }
-        if (!$insectos) {
-            array_push($errors, 'Debe ingresar insectos');
-        }
-        if (!$observaciones) {
-            array_push($errors, 'Debe ingresar observaciones generales del cultivo');
-        }
-        if (!$recomendaciones) {
-            array_push($errors, 'Debe ingresar recomendaciones');
-        }
-        if (empty($errors)) {
-            //require_once('core/DBManager.php')
-            //require_once('core/login.php');
-            // $result = checkLogin($user,$pass);
-        }
-    }
     ?>
 
     <div class="panel panel-success">
@@ -99,14 +23,13 @@ if (!isset($_SESSION['email'])) {
         <div class="panel-body">
             <form action="updateVisita.php" method="POST">
                 <div id="agricultor">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <input type="hidden" name="formularioId" value="<?= $id; ?>">
-                            <label for="razonsocial">Razón Social: </label>
-                            <input type="text" name="razonsocial" class="form-control" value="<?= $row['razon'] ?>"
-                                   placeholder="Ingrese razon social">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="razonsocial">Razón Social: </label>
+                                <input type="text" name="razonsocial" class="form-control" value="<?= $row['razon'] ?>"
+                                       placeholder="Ingrese razon social">
+                            </div>
                         </div>
-                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="agricultor">Agricultor: </label>
@@ -142,10 +65,11 @@ if (!isset($_SESSION['email'])) {
                 <div id="formularioVenta">
                     <div class="col-md-3">
                         <div class="form-group">
+                        <input type="hidden" name="visitaid" class="form-control" value="<?php echo $id; ?>">
                             <label for="fecha">Fecha: </label>
                             <input type="text" name="fecha" class="form-control"
                                    value="<?php $date = new DateTime($row['fechaVisita']);
-                                   echo date_format($date, "d-m-Y"); ?>"
+                                   echo date_format($date, "Y-m-d"); ?>"
                                    placeholder="Ingrese fecha">
                         </div>
                     </div>

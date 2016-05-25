@@ -65,7 +65,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/curimapuweb/src/clases/Marker.php';
     }
 </script>
 
-
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFMa4pd7uMEU0NRi7dHS7YVBcFQvKG5Ow&signed_in=true&callback=initMap"></script>
 <?php include 'includes/footer.php'; } ?>

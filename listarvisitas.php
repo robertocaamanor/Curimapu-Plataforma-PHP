@@ -84,12 +84,12 @@ else{
 
 <hr/>
    <?php 
-          $hoy = date( "d-m-y" );
-          $ayer = date( "d-m-y", strtotime("-1 day",strtotime($hoy)));
+          $hoy = date( "Y-m-d" );
+          $ayer = date( "Y-m-d", strtotime("-1 day",strtotime($hoy)));
           $primero = 1;
           while($row=mssql_fetch_array($result))
           {
-           $date = date_format(new DateTime($row['fecha']), 'd-m-y');
+           $date = date_format(new DateTime($row['fecha']), 'Y-m-d');
             //$date = date_format($row['fecha'],'d-m-y');
            if($primero){
             $compare = $date;

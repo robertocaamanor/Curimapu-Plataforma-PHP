@@ -22,7 +22,7 @@ include 'includes/header.php';
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nombrevendedor">Nombre vendedor</label>
-                            <input type="text" name="nombrevendedor" class="form-control"
+                            <input type="text" name="nombrevendedor" id="nombrevendedor" class="form-control"
                                    placeholder="Ingrese nombre" required>
                         </div>
                     </div>
@@ -45,8 +45,8 @@ include 'includes/header.php';
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" class="form-control"
-                                   placeholder="Ingrese email" required>
+                            <input type="email" name="email" id="email" class="form-control"
+                                   placeholder="Ingrese email" required email>
                         </div>
                     </div>
                 </div>
@@ -71,5 +71,5 @@ include 'includes/header.php';
         </div>     
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
 <?php include 'includes/footer.php'; } ?>

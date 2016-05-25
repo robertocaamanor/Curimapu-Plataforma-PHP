@@ -14,15 +14,14 @@ if (!empty($_POST)) {
             FormularioVisita_humdad='" . $_POST['humedad'] . "',
             Observaciones='" . $_POST['observaciones'] . "',
             FormularioVisita_recomendacion='" . $_POST['recomendaciones'] . "'
-            where FormularioVisita_id='" . $_POST['formularioId'] . "'";
+            where FormularioVisita_id='" . $_POST['visitaid'] . "'";
 
 
-    $recurso = mssql_prepare($con, $sql);
-
-    if (mssql_execute($recurso)) {
-       echo "Agregado correctamente";
+    $recurso = mssql_query($sql, $con);
+    if ($recurso) {
+       echo "Actualizado correctamente";
    } else {
-        echo "No Agregado";
+        echo "No Actualizado";
     }
 }
 
