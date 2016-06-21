@@ -16,10 +16,10 @@ if(isset($_POST['inicio'],$_POST['final'], $_POST['busquedavendedor'])){
   $inicio = $_POST['inicio'];
   $final = $_POST['final'];
   $vendedor = $_POST['busquedavendedor'];
-  $result = listarventasmixto($conn, $inicio, $final);
+  $result = listarvisitasmixto($conn, $inicio, $final, $vendedor);
 }
 else{
-  $result = listarVentas($conn, $semana, $fechahoy);
+  $result = listarVisitas($conn, $semana, $fechahoy);
 }
 ?>
 <script type="text/javascript" charset="utf8"
@@ -52,7 +52,7 @@ else{
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-      <form class="form-inline" action="mapafechaagricultor.php" method="POST">
+      <form class="form-inline" action="mapafechavisitaagricultor.php" method="POST">
         <div class="formulario">
           <div class="form-group">
             <label for="exampleInputName2">Desde</label>
@@ -97,16 +97,16 @@ else{
                                 // Cierras la consulta
                                 mssql_free_result($sql);  
                             ?>
-              </div>
-              <button type="submit" class="btn btn-default">Buscar</button>        
+              </div>  
+              <button type="submit" class="btn btn-default">Buscar</button>      
        </div>
               
           
        </div>    
       </form>
-  </div>
-   <div id="menu1" class="tab-pane fade">
-      <form class="formulario form-inline" action="mapafecha.php" method="POST">
+</div>
+ <div id="menu1" class="tab-pane fade">
+      <form class="formulario form-inline" action="mapafechavisita.php" method="POST">
         <div class="form-group">
           <label for="exampleInputName2">Desde</label>
           <div class="input-group">    
@@ -155,7 +155,6 @@ else{
       </form>
     </div>
   </div>
-  
 <hr/>
    <?php 
       $hoy = date( "Y-m-d" );
@@ -181,7 +180,7 @@ else{
        <?php }
        if($compare==$date){?>
           <div class="list-group">
-            <a href="mapasearch.php?id=<?php echo $row['id']; ?>" class="list-group-item">
+            <a href="mapasearchvisita.php?id=<?php echo $row['id']; ?>" class="list-group-item">
               <div class="grupo">
                   <div class="img-principal">
                       <img src="http://odontopekes.com/wp-content/uploads/2016/01/facebookanon.jpg" alt="" class="img-circle">
@@ -189,9 +188,9 @@ else{
                   <div class="cuerpo-principal">
                       <h4 class="list-group-item-heading">Agricultor: <?php echo $row['agricultor']; ?></h4>
                       <p class="list-group-item-text"><b>Vendedor: <?php echo $row['PrimerNombre']." ".$row['SegundoNombre']; ?></b></p>
-                      <p class="list-group-item-text"><b>Especie: <?php echo $row['nombreespecie']; ?></b></p>
-                      <p class="list-group-item-text"><b>Comuna: <?php echo $row['Ubicacion']; ?></b></p>
-                      <p class="list-group-item-text"><b>Observacion: <?php echo $row['observacion']; ?></b></p>
+                      <p class="list-group-item-text"><b>Especie: <?php echo $row['nombreespecie']; ?></b></p>                      
+                      <p class="list-group-item-text"><b>Ubicacion: <?php echo $row['Ubicacion']; ?></b></p>
+                      <p class="list-group-item-text"><b>Observación: <?php echo $row['observacion']; ?></b></p>
                   </div>
               </div>
             </a>
@@ -207,7 +206,7 @@ else{
           </div>
           <div class="panel-cuerpo">
           <div class="list-group">
-            <a href="mapasearch.php?id=<?php echo $row['id']; ?>" class="list-group-item">
+            <a href="mapasearchvisita.php?id=<?php echo $row['id']; ?>" class="list-group-item">
               <div class="grupo">
                   <div class="img-principal">
                       <img src="http://odontopekes.com/wp-content/uploads/2016/01/facebookanon.jpg" alt="" class="img-circle">
@@ -217,7 +216,7 @@ else{
                       <p class="list-group-item-text"><b>Vendedor: <?php echo $row['PrimerNombre']." ".$row['SegundoNombre']; ?></b></p>
                       <p class="list-group-item-text"><b>Especie: <?php echo $row['nombreespecie']; ?></b></p>
                       <p class="list-group-item-text"><b>Ubicacion: <?php echo $row['Ubicacion']; ?></b></p>
-                      <p class="list-group-item-text"><b>Observacion: <?php echo $row['observacion']; ?></b></p>
+                      <p class="list-group-item-text"><b>Observación: <?php echo $row['observacion']; ?></b></p>
                   </div>
               </div>
             </a>
@@ -226,15 +225,15 @@ else{
       }
       } while(mssql_next_result($result));
       cerrar($conn) ?>
-  </div>
-
+</div>
+</div>
 <script type="text/javascript">
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 14,
             center: {lat: -36.8308521, lng: -73.0582368}
         });
-        <?php $markers1 = Marker::listMarkers(); ?>
+        <?php $markers1 = Marker::listVisitaMarkers(); ?>
         <?php while (list(, $valor) = each($markers1)) {
         echo " var marker = new google.maps.Marker({";
         echo "map: map});";

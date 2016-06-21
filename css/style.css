@@ -6,15 +6,15 @@ body, html {
     overflow:hidden;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-    background: #F5AB35;
+    background: #FFFFFF;
 }
 
 body a {
-    color: #019875;
+    color: #6D6D6D;
 }
 
 body a:hover {
-    color: #3FC380;
+    color: #6D6D6D;
 }
 
 /* FORMULARIO */
@@ -24,9 +24,6 @@ body a:hover {
     background: #FFFFFF;
     padding: 20px;
     margin: 20px auto;
-    -webkit-box-shadow: 0px 0px 7px 0px #8E8E8E;
-    -moz-box-shadow: 0px 0px 7px 0px #8E8E8E;
-    box-shadow: 0px 0px 7px 0px #8E8E8E;
 }
 
 .form .avatar-form img {
@@ -124,7 +121,7 @@ body a:hover {
     width: 100%;
     height: 100%;
     position: absolute;
-    background: #C8F7C5;
+    background: #eff1f0 url('http://img.eltipografo.cl/media/2013/02/Choclos-1.jpg')no-repeat;
     padding: 30px;
     transition: all 0.3s;
     overflow: scroll;
@@ -136,12 +133,14 @@ body a:hover {
 
 .sitio-principal {
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
+    padding: 20px;
+    background: #eff1f0;
 }
 
 .img-principal {
-    width: 10%;
-    height: 10%;
+    width: 12%;
+    height: 12%;
     padding: 15px;
     float: left;
 }
@@ -170,6 +169,7 @@ body a:hover {
 .panel-principal {
     width: 65%;
     margin: 0 auto;
+    padding-top: 20px;
 }
 
 .formulario {
@@ -180,4 +180,49 @@ body a:hover {
 
 #markers_table {
     background: #FFFFFF;
+}
+
+/* HEADER */
+
+.header {
+    height: 182px;
+    background: url("http://i.imgur.com/3sIs8M9.png") no-repeat;
+    margin: 0 10%;
+}
+
+.header img {
+    width: 130px;
+    padding: 10px;
+}
+
+/* ESTILOS DEL PANEL */
+
+.panelsemilllas {
+    padding-top: 10px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.panel-titulo {
+    background: #F5AB35;
+    color: #FFFFFF;
+    padding: 20px;
+}
+
+.panel-cuerpo {
+    background: #f9fafa;
+    padding: 20px;
+}
+
+.panel-cuerpo p {
+    font-size: 15px;
+}
+
+.tablas {
+    font-size: 18px;
+}
+
+.form-group {
+    padding-top: 10px;
 }

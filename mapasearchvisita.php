@@ -27,38 +27,41 @@ include 'src/clases/Marker.php';
 <br>
 <div class="sitio-principal">
     <div class="row">
-    <?php $markers = Marker::searchMarkers(); ?>
+    <?php $markers = Marker::searchVisitaMarkers(); ?>
     <?php while (list(, $valor) = each($markers)) { ?>
         <div class="col-md-3">
             <div class="form-group">
                 <h5>Fecha</h5>
-                <p><?php echo date_format(new DateTime($valor->getFecha()), 'Y-m-d'); ?></p>
+                <p><?php echo date_format(new DateTime($valor->getFechavisita()), 'Y-m-d'); ?></p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <h5>Agricultor</h5>
-                <p><?php echo $valor->getAgricultor(); ?></p>
+                <p><?php echo $valor->getAgricultorvisita(); ?></p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <h5>Especie</h5>
-                <p><?php echo $valor->getEspecie(); ?></p>
+                <p><?php echo $valor->getEspecievisita(); ?></p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <h5>Vendedor</h5>
-                <p><?php echo $valor->getVendedornombre()." ".$valor->getVendedorapellido(); ?></p>
+                <p><?php echo $valor->getVendedorvisitanombre()." ".$valor->getVendedorvisitaapellido(); ?></p>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <h5>Comuna</h5>
-                <p><?php echo $valor->getUbicacion(); ?></p>
+                <p><?php echo $valor->getUbicacionvisita(); ?></p>
             </div>
         </div>
+        
+        
+        
     <?php } ?>
     </div>
 </div>
@@ -66,24 +69,24 @@ include 'src/clases/Marker.php';
 <script type="text/javascript">
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-        <?php $markers1 = Marker::searchMarkers(); ?>
+            <?php $markers1 = Marker::searchVisitaMarkers(); ?>
         <?php while (list(, $valor) = each($markers1)) {
-        echo "zoom: 14,";
-        echo "center: {lat: " . $valor->getLat() . ", lng: " . $valor->getLng() . "}";
-        echo "});";
+            echo "zoom: 10,";
+            echo "center: {lat: " . $valor->getLatvisita() . ", lng: " . $valor->getLngvisita() . "}";
+            echo "});";
         
         echo " var marker = new google.maps.Marker({";
-        echo "position: {lat:" . $valor->getLat() . ",lng:" . $valor->getLng() . "},";
-        echo " title: '" . $valor->getAgricultor() . " / ". $valor->getLat() .",". $valor->getLng() ."',";
+        echo "position: {lat:" . $valor->getLatvisita() . ",lng:" . $valor->getLngvisita() . "},";
+        echo " title: '" . $valor->getAgricultorvisita() . " / ". $valor->getLatvisita() .",". $valor->getLngvisita() ."',";
         echo "map: map});";
         echo "var infowindow = new google.maps.InfoWindow({";
-        echo "content:'". $valor->getUbicacion() ."' });";
+        echo "content:'". $valor->getUbicacionvisita() ."' });";
         echo "google.maps.event.addListener(marker, 'click', function() { ";
         echo "infowindow.open(map,marker); ";
         echo "});"; 
     }
         ?>
-    }    
+    }
 </script>
 
 <script async defer

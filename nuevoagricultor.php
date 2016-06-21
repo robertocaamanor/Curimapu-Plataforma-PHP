@@ -16,34 +16,50 @@ include 'src/functions/dbfunctions.php';
 <div class="panel-principal">
     <div class="panelsemilllas">
         <div class="panel-titulo">
-            <h3 class="panel-title">Nuevo Usuario</h3>
+            <h3 class="panel-title">Nuevo Agricultor</h3>
         </div>
         <div class="panel-cuerpo">
-            <form action="agregarvendedor.php" method="POST" id="vendedor_validation">
+            <form action="agregaragricultor.php" method="POST" id="agricultor_validation">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nombrevendedor">Nombre vendedor</label>
-                            <input type="text" name="nombrevendedor" id="nombrevendedor" class="form-control"
+                            <label for="nombreagricultor">Nombre agricultor</label>
+                            <input type="text" name="nombreagricultor" id="nombreagricultor" class="form-control"
                                    placeholder="Ingrese nombre" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="telefono">Telefono</label>
-                            <input type="text" name="telefono" id="telefono" class="form-control"
-                                   placeholder="Ingrese telefono">
+                            <label for="nombrevendedor">Comuna</label>
+                            <input type="text" name="comuna" id="comuna" class="form-control"
+                                   placeholder="Ingrese comuna" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label for="contacto">Contacto</label>
+                            <input type="text" name="contacto" class="form-control"
+                                   placeholder="Ingrese contacto">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" name="telefono"  class="form-control"
+                                   placeholder="Ingrese telefono">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">      
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label for="rut">R.U.T.</label>
                             <input type="text" name="rut" id="rut" class="form-control"
                                    placeholder="Ingrese R.U.T.">
                         </div>
-                    </div>
+                    </div>              
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -51,27 +67,11 @@ include 'src/functions/dbfunctions.php';
                                    placeholder="Ingrese email">
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6">                        
                         <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" id="password" name="password" class="form-control"
-                                   placeholder="Ingrese contraseña" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="repetirpassword">Repetir contraseña</label>
-                            <input type="password" id="password_confirm" name="password_confirm" class="form-control"
-                                   placeholder="Repita contraseña" required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="perfil">Perfil</label>
+                            <label for="perfil">Usuario</label>
                             <?php
-                                $sql = mssql_query("select * from perfiles order by PerfilNombre");
+                                $sql = mssql_query("select * from [gam].[User]");
 
                                 // Verifica que te llegaron datos de respuesta:
                                 if (mssql_num_rows($sql) > 0)
@@ -80,12 +80,12 @@ include 'src/functions/dbfunctions.php';
                                   // Puedes mostrarlos o guardarlos en un arreglo para posterior uso...
 
                                   // Yo he elegido mostrarlos directamente en el select:
-                                  echo"<select name='perfil' class='form-control'>\n";
+                                  echo"<select name='user' class='form-control'>\n";
                                   
                                   // Aquí recorres los datos recibidos:
                                   while ($temp = mssql_fetch_array($sql))
                                   {
-                                    print" <option value='".$temp["PerfilId"]."'>".$temp["PerfilNombre"]."</option>\n";
+                                    print" <option value='".$temp["UserName"]."'>".$temp["UserFirstName"]." ".$temp["UserLastName"]."</option>\n";
                                   }
 
                                   echo"  </select>\n";
