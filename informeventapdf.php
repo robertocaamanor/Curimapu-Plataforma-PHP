@@ -22,9 +22,9 @@ $pdf->ezText("\nINFORME SEGUIMIENTO DE VENTAS",20,array('justification'=>'center
 
 $pdf->ezText("\n",12); 
 $data = array(
-array('name'=>"Fecha: ".date_format(new DateTime($row['fecha']), 'd-m-y'),'type'=>utf8_decode("Contacto:".$row['contacto']))
-,array('name'=>"Agricultor: ".utf8_decode($row['agricultor']),'type'=>utf8_decode("Ubicación:".$row['ubicacion']))
-,array('name'=>"Especie: ".utf8_decode($row['nombreespecie']),'type'=>utf8_decode("Teléfono:").$row['fono'])
+array('name'=>"Fecha: ".date_format(new DateTime($row['fecha']), 'd-m-y'),'type'=>utf8_decode("Contacto: ".$row['contacto']))
+,array('name'=>"Agricultor: ".utf8_decode($row['agricultor']),'type'=>utf8_decode("Ubicación: ".$row['ubicacion']))
+,array('name'=>"Especie: ".utf8_decode($row['nombreespecie']),'type'=>utf8_decode("Teléfono: ").$row['fono'])
 ,array('name'=>"Variedad: ".utf8_decode($row['variedad']),'type'=>"E-Mail: ".utf8_decode($row['email']))
 );
 $pdf->ezTable($data,array('name'=>'<i>Alias</i>','type'=>'Type'),'',array('showHeadings'=>0,'shaded'=>0

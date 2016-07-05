@@ -56,8 +56,8 @@ class Marker
     {
         $markerList = array();
         try {
-            $sql = ("select FormularioVenta_fecha as Fecha,
-                    FormularioVenta_id as Id,
+            $sql = ("select FormularioVentafecha as Fecha,
+                    FormularioVentaid as Id,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVenta.FormularioVenta_gps as latlng
                     from FormularioVenta
@@ -87,8 +87,8 @@ class Marker
     {
         $markerList = array();
         try {
-            $sql = ("select FormularioVisita_Fecha as Fecha,
-                    FormularioVisita_id as Id,
+            $sql = ("select FormularioVisitaFecha as Fecha,
+                    FormularioVisitaid as Id,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVisita.FormularioVisita_posicion as latlng
                     from FormularioVisita
@@ -119,20 +119,20 @@ class Marker
         $markerList = array();
         $id = $_GET['id'];
         try {
-            $sql = ("select FormularioVenta_fecha as Fecha,
-                    FormularioVenta_id as Id,
+            $sql = ("select FormularioVentafecha as Fecha,
+                    FormularioVentaid as Id,
                     Agricultorr.Agricultorr_nombre as NombreAgricultor,
                     Agricultorr.Agricultorr_id as IdAgricultor,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     u.UserFirstName as PrimerNombre,
                     u.UserLastName as SegundoNombre,
-                    e.Especies_nombre as Especies,
+                    e.Esppecienombre as Especies,
                     FormularioVenta.FormularioVenta_gps as latlng
                     from FormularioVenta
                     left join Agricultorr on FormularioVenta.Agricultorr_id = Agricultorr.Agricultorr_id
                     left join [gam].[User] as u on u.UserName = Agricultorr.UserID
-                    left join Especies as e on e.Especies_id = FormularioVenta.Especies_id
-                    where FormularioVenta_id = '$id'");
+                    left join Esppecie as e on e.Esppecieid = FormularioVenta.Esppecieid
+                    where FormularioVentaid = '$id'");
             $conn = connectDB();
             $result = query($conn,$sql);
 
@@ -165,20 +165,20 @@ class Marker
         $markerList = array();
         $id = $_GET['id'];
         try {
-            $sql = ("select FormularioVisita_Fecha as Fecha,
-                    FormularioVisita_id as Id,
+            $sql = ("select FormularioVisitaFecha as Fecha,
+                    FormularioVisitaid as Id,
                     Agricultorr.Agricultorr_nombre as Agricultorvisita,
                     FormularioVisita.Agricultorr_id as IdAgricultorvisita,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
-                    e.Especies_nombre as Especie,
+                    e.Esppecienombre as Especie,
                     u.UserFirstName as PrimerNombre,
                     u.UserLastName as SegundoNombre,
                     FormularioVisita.FormularioVisita_posicion as latlng
                     from FormularioVisita
                     left join Agricultorr on FormularioVisita.Agricultorr_id = Agricultorr.Agricultorr_id
                     left join [gam].[User] as u on u.UserName = Agricultorr.UserID
-                    left join Especies as e on e.Especies_id = FormularioVisita.Especies_id
-                    where FormularioVisita_id = '$id'");
+                    left join Esppecie as e on e.Esppecieid = FormularioVisita.Esppecieid
+                    where FormularioVisitaid = '$id'");
             $conn = connectDB();
             $result = query($conn,$sql);
 
@@ -210,8 +210,8 @@ class Marker
         $markerList = array();
         $idagricultor = $_GET['id'];
         try {
-            $sql = ("select FormularioVenta.FormularioVenta_fecha as Fecha,
-                    FormularioVenta.FormularioVenta_id as Id,
+            $sql = ("select FormularioVenta.FormularioVentafecha as Fecha,
+                    FormularioVenta.FormularioVentaid as Id,
                     Agricultorr.Agricultorr_nombre as NombreAgricultor,
                     FormularioVenta.Agricultorr_id as IdAgricultor,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
@@ -247,8 +247,8 @@ class Marker
         $markerList = array();
         $idagricultor = $_GET['id'];
         try {
-            $sql = ("select FormularioVisita_Fecha as Fecha,
-                    FormularioVisita_id as Id,
+            $sql = ("select FormularioVisitaFecha as Fecha,
+                    FormularioVisitaid as Id,
                     Agricultorr.Agricultorr_nombre as AgricultorNombre,
                     FormularioVisita.Agricultorr_id as IdAgricultor,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
@@ -287,15 +287,15 @@ class Marker
         $final = $_POST['final'];
         $nombrevendedor = $_POST['busquedavendedor'];
         try {
-            $sql = ("select FormularioVenta.FormularioVenta_fecha as Fecha,
-                    FormularioVenta.FormularioVenta_id as IdVenta,
+            $sql = ("select FormularioVenta.FormularioVentafecha as Fecha,
+                    FormularioVenta.FormularioVentaid as IdVenta,
                     Agricultorr.Agricultorr_nombre as NombreAgricultor,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVenta.FormularioVenta_gps as latlng
                     from FormularioVenta
                     left join Agricultorr on FormularioVenta.Agricultorr_id = Agricultorr.Agricultorr_id
                     left join [gam].[User] as u on u.UserName = Agricultorr.UserID
-                    where FormularioVenta.FormularioVenta_fecha BETWEEN '".$inicio."' AND '".$final."' AND u.UserNameSpace LIKE '%".$nombrevendedor."%'");
+                    where FormularioVenta.FormularioVentafecha BETWEEN '".$inicio."' AND '".$final."' AND u.UserID LIKE '%".$nombrevendedor."%'");
             $conn = connectDB();
             $result = query($conn,$sql);
 
@@ -332,14 +332,14 @@ class Marker
         $final = $_POST['final'];
         $nombreagricultor = $_POST['busquedaagricultor'];
         try {
-            $sql = ("select FormularioVenta.FormularioVenta_fecha as Fecha,
-                    FormularioVenta.FormularioVenta_id as IdVenta,
+            $sql = ("select FormularioVenta.FormularioVentafecha as Fecha,
+                    FormularioVenta.FormularioVentaid as IdVenta,
                     Agricultorr.Agricultorr_nombre as NombreAgricultor,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVenta.FormularioVenta_gps as latlng
                     from FormularioVenta
                     left join Agricultorr on FormularioVenta.Agricultorr_id = Agricultorr.Agricultorr_id
-                    where FormularioVenta.FormularioVenta_fecha BETWEEN '".$inicio."' AND '".$final."' AND Agricultorr.Agricultorr_nombre LIKE '%".$nombreagricultor."%'");
+                    where FormularioVenta.FormularioVentafecha BETWEEN '".$inicio."' AND '".$final."' AND Agricultorr.Agricultorr_nombre LIKE '%".$nombreagricultor."%'");
             $conn = connectDB();
             $result = query($conn,$sql);
 
@@ -375,15 +375,15 @@ class Marker
         $finalvisita = $_POST['final'];
         $nombrevendedorvisita = $_POST['busquedavendedor'];
         try {
-            $sql = ("select FormularioVisita.FormularioVisita_Fecha as Fecha,
-                    FormularioVisita.FormularioVisita_id as Id,
+            $sql = ("select FormularioVisita.FormularioVisitaFecha as Fecha,
+                    FormularioVisita.FormularioVisitaid as Id,
                     Agricultorr.Agricultorr_nombre as AgricultorNombre,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVisita.FormularioVisita_posicion as latlng
                     from FormularioVisita
                     left join Agricultorr on FormularioVisita.Agricultorr_id = Agricultorr.Agricultorr_id
                     left join [gam].[User] as u on u.UserName = Agricultorr.UserID
-                    where FormularioVisita_Fecha BETWEEN '".$iniciovisita."' AND '".$finalvisita."' AND u.UserNameSpace LIKE '%".$nombrevendedorvisita."%'");
+                    where FormularioVisitaFecha BETWEEN '".$iniciovisita."' AND '".$finalvisita."' AND u.UserID LIKE '%".$nombrevendedorvisita."%'");
             $conn = connectDB();
             $result = query($conn,$sql);
 
@@ -419,14 +419,14 @@ class Marker
         $finalvisita = $_POST['final'];
         $nombreagricultorvisita = $_POST['busquedaagricultor'];
         try {
-            $sql = ("select FormularioVisita_Fecha as Fecha,
-                    FormularioVisita_id as Id,
+            $sql = ("select FormularioVisitaFecha as Fecha,
+                    FormularioVisitaid as Id,
                     Agricultorr.Agricultorr_nombre as AgricultorNombre,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVisita.FormularioVisita_posicion as latlng
                     from FormularioVisita
                     left join Agricultorr on FormularioVisita.Agricultorr_id = Agricultorr.Agricultorr_id
-                    where FormularioVisita_Fecha BETWEEN '".$iniciovisita."' AND '".$finalvisita."' AND Agricultorr.Agricultorr_nombre LIKE '%".$nombreagricultorvisita."%'");
+                    where FormularioVisitaFecha BETWEEN '".$iniciovisita."' AND '".$finalvisita."' AND Agricultorr.Agricultorr_nombre LIKE '%".$nombreagricultorvisita."%'");
             $conn = connectDB();
             $result = query($conn,$sql);
 

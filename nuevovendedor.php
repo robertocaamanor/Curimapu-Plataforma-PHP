@@ -1,7 +1,7 @@
 <?php
 session_start(); 
 
-    if(!isset($_SESSION['email'])) 
+    if((!isset($_SESSION['email'])) || ($_SESSION['perfil'] != 2)) 
     { 
 
         echo "No tienes permiso para entrar a esta pagina"; 

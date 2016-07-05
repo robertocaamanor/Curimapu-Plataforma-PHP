@@ -3,7 +3,7 @@
 function connectDB()
 {
     $conn=mssql_connect("xcom.ddns.net", "sa", "jYcC5DLt");
-    mssql_select_db("semillasr4", $conn);
+    mssql_select_db("SemillasCurimapuBD", $conn);
     return $conn;
 }
 
@@ -32,19 +32,19 @@ function cerrar($conn)
 
 function listarVentas($conn, $inicial, $final)
 {
-    $sql = "select fv.FormularioVenta_fecha as fecha, fv.FormularioVenta_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVentafecha as fecha, fv.FormularioVentaid as id , a.Agricultorr_nombre as agricultor, 
             fv.FormularioVenta_obsv as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre, fv.FormularioVenta_imagem_GXI as imagen
-            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVenta_fecha between '".$inicial."' and '".$final."'
-            order by fv.FormularioVenta_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre, fv.FormularioVenta_imagem_GXI as imagen
+            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVentafecha between '".$inicial."' and '".$final."'
+            order by fv.FormularioVentafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarAgricultores($conn)
 {
-    $sql = "select Agricultorr_id as id, Agricultorr_nombre as Nombre
+    $sql = "select Agricultorr_id as id, Agricultorr_nombre as Nombre, UserID as Vendedor
             from Agricultorr order by Agricultorr_nombre";
     $result = query($conn, $sql);
     return $result;
@@ -58,18 +58,18 @@ function buscarAgricultor($conn, $nombre){
 }
 
 function listarVisitas($conn, $fechainicial, $fechafinal){
-    $sql = "select fv.FormularioVisita_fecha as fecha, fv.FormularioVisita_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVisitafecha as fecha, fv.FormularioVisitaid as id , a.Agricultorr_nombre as agricultor, 
             fv.Observaciones as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre, fv.FormularioVisita_im_GXI as imagen
-            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVisita_fecha BETWEEN '".$fechainicial."' AND '".$fechafinal."'
-            order by fv.FormularioVisita_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre, fv.FormularioVisita_im_GXI as imagen
+            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVisitafecha BETWEEN '".$fechainicial."' AND '".$fechafinal."'
+            order by fv.FormularioVisitafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function detalleVenta($id, $conn){
-    $sql = "select fv.FormularioVenta_fecha as fecha, 
+    $sql = "select fv.FormularioVentafecha as fecha, 
             fv.FormularioVenta_Supsiembre as superficiesiembra,
             fv.FormularioVenta_intSiembraTota as intencionsiembra,
             fv.FormularioVenta_intSiembraCuri as intencionsiembraanterior, 
@@ -86,11 +86,11 @@ function detalleVenta($id, $conn){
             a.Agricultorr_Contacto as contacto,
             a.Agricultorr_Telefono as fono, 
             a.Agricultorr_ubicacion as ubicacion, 
-            fv.FormularioVenta_Variedad as variedad,
-            fv.Especies_id as Especie,
-            e.Especies_nombre as nombreespecie
-            from FormularioVenta fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Especies as e on e.Especies_id = fv.Especies_id
-            where fv.FormularioVenta_id =".$id;
+            fv.FormularioVentaVariedad as variedad,
+            fv.Esppecieid as Especie,
+            e.Esppecienombre as nombreespecie
+            from FormularioVenta fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Esppecie as e on e.Esppecieid = fv.Esppecieid
+            where fv.FormularioVentaid =".$id;
     $result = query($conn, $sql);
     return $result;
 
@@ -113,7 +113,7 @@ function detalleAgricultores($id, $conn){
 }
 
 function detalleVisita($id, $conn){
-     $sql = "select  fv.FormularioVisita_fecha as fechaVisita,
+     $sql = "select  fv.FormularioVisitafecha as fechaVisita,
             fv.FormularioVisita_estCrecimient as estadocrecimiento,
             fv.FormularioVisita_dSemSiebra as dsemillasiembra,
             fv.FormularioVisita_enferPlagas as enfermedades,
@@ -129,97 +129,98 @@ function detalleVisita($id, $conn){
             a.Agricultorr_Telefono as fono,
             a.Agricultorr_Contacto as contacto,
             a.Agricultorr_ubicacion as ubicacion,
-            fv.Especies_id as Especie,
-            e.Especies_nombre as nombreespecie,
+            fv.Esppecieid as Especie,
+            e.Esppecienombre as nombreespecie,
             fv.FormularioVisita_Variedad as variedad
-            from FormularioVisita fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Especies as e on e.Especies_id = fv.Especies_id
-            where fv.FormularioVisita_id ='" . $id . "'";
+            from FormularioVisita fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Esppecie as e on e.Esppecieid = fv.Esppecieid
+            where fv.FormularioVisitaid ='" . $id . "'";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarventasfecha($conn, $inicial, $final){
-    $sql = "select fv.FormularioVenta_fecha as fecha, fv.FormularioVenta_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVentafecha as fecha, fv.FormularioVentaid as id , a.Agricultorr_nombre as agricultor, 
             fv.FormularioVenta_obsv as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVenta_fecha between '".$inicial."' and '".$final."'
-            order by fv.FormularioVenta_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVentafecha between '".$inicial."' and '".$final."'
+            order by fv.FormularioVentafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarvisitasfecha($conn, $inicial, $final){
-    $sql = "select fv.FormularioVisita_fecha as fecha, fv.FormularioVisita_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVisitafecha as fecha, fv.FormularioVisitaid as id , a.Agricultorr_nombre as agricultor, 
             fv.Observaciones as observacion, a.Agricultorr_ubicacion as Ubicacion,
             e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
             from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVisita_Fecha between '".$inicial."' and '".$final."'
-            order by fv.FormularioVisita_Fecha desc";
+            where fv.FormularioVisitaFecha between '".$inicial."' and '".$final."'
+            order by fv.FormularioVisitaFecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarventasagricultor($conn, $nombre){
-    $sql = "select fv.FormularioVenta_fecha as fecha, fv.FormularioVenta_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVentafecha as fecha, fv.FormularioVentaid as id , a.Agricultorr_nombre as agricultor, 
             fv.FormularioVenta_obsv as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
             where a.Agricultorr_nombre LIKE '%".$nombre."%'
-            order by fv.FormularioVenta_fecha desc";
+            order by fv.FormularioVentafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarvisitasagricultor($conn, $nombre){
-    $sql = "select fv.FormularioVisita_fecha as fecha, fv.FormularioVisita_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVisitafecha as fecha, fv.FormularioVisitaid as id , a.Agricultorr_nombre as agricultor, 
             fv.Observaciones as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
             where a.Agricultorr_nombre LIKE '%".$nombre."%'
-            order by fv.FormularioVisita_Fecha desc";
+            order by fv.FormularioVisitaFecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarventasagricultormixto($conn, $inicial, $final, $nombre){
-    $sql = "select fv.FormularioVenta_fecha as fecha, fv.FormularioVenta_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVentafecha as fecha, fv.FormularioVentaid as id , a.Agricultorr_nombre as agricultor, 
             fv.FormularioVenta_obsv as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVenta_fecha between '".$inicial."' and '".$final."' AND a.Agricultorr_nombre LIKE '%".$nombre."%'
-            order by fv.FormularioVenta_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVentafecha between '".$inicial."' and '".$final."' AND a.Agricultorr_nombre LIKE '%".$nombre."%'
+            order by fv.FormularioVentafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 function listarvisitasagricultormixto($conn, $inicial, $final, $nombre){
-    $sql = "select fv.FormularioVisita_fecha as fecha, fv.FormularioVisita_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVisitafecha as fecha, fv.FormularioVisitaid as id , a.Agricultorr_nombre as agricultor, 
             fv.Observaciones as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVisita_fecha between '".$inicial."' and '".$final."' AND a.Agricultorr_nombre LIKE '%".$nombre."%'
-            order by fv.FormularioVisita_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVisitafecha between '".$inicial."' and '".$final."' AND a.Agricultorr_nombre LIKE '%".$nombre."%' 
+            order by fv.FormularioVisitafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
 
 function listarventasvendedormixto($conn, $inicial, $final, $nombre){
-    $sql = "select fv.FormularioVenta_fecha as fecha, fv.FormularioVenta_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVentafecha as fecha, fv.FormularioVentaid as id , a.Agricultorr_nombre as agricultor, 
             fv.FormularioVenta_obsv as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVenta_fecha between '".$inicial."' and '".$final."' AND u.UserNameSpace LIKE '%".$nombre."%'
-            order by fv.FormularioVenta_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVenta as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVentafecha between '".$inicial."' and '".$final."' AND a.UserID LIKE '%".$nombre."%' 
+            order by fv.FormularioVentafecha desc";
     $result = query($conn, $sql);
     return $result;
 }
+
 function listarvisitasvendedormixto($conn, $inicial, $final, $nombre){
-    $sql = "select fv.FormularioVisita_fecha as fecha, fv.FormularioVisita_id as id , a.Agricultorr_nombre as agricultor, 
+    $sql = "select fv.FormularioVisitafecha as fecha, fv.FormularioVisitaid as id , a.Agricultorr_nombre as agricultor, 
             fv.Observaciones as observacion, a.Agricultorr_ubicacion as Ubicacion,
-            e.Especies_nombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
-            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Especies as e on e.Especies_id = fv.Especies_id inner join [gam].[User] as u on a.UserID = u.UserName
-            where fv.FormularioVisita_fecha between '".$inicial."' and '".$final."' AND u.UserNameSpace LIKE '%".$nombre."%'
-            order by fv.FormularioVisita_fecha desc";
+            e.Esppecienombre as nombreespecie, u.UserFirstName as PrimerNombre, u.UserLastName as SegundoNombre
+            from FormularioVisita as fv inner join Agricultorr as a on fv.Agricultorr_id = a.Agricultorr_id inner join Esppecie as e on e.Esppecieid = fv.Esppecieid inner join [gam].[User] as u on a.UserID = u.UserName
+            where fv.FormularioVisitafecha between '".$inicial."' and '".$final."' AND a.UserID LIKE '%".$nombre."%' 
+            order by fv.FormularioVisitafecha desc";
     $result = query($conn, $sql);
     return $result;
 }

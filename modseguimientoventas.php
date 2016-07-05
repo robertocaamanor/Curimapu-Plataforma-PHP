@@ -102,7 +102,7 @@ if (!isset($_SESSION['email'])) {
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                            <input type="hidden" name="formularioId" value=" <?= $id; ?>">
+                            <input type="hidden" name="formularioId" value="<?= $id; ?>">
                                 <label for="superficiesiembra">Superficie sembrado temp. anterior (Has)</label>
                                 <input type="text" name="superficiesiembra" class="form-control"
                                        value="<?= $row['superficiesiembra'] ?>"
@@ -198,7 +198,14 @@ if (!isset($_SESSION['email'])) {
                         </div>
                     </div>
                 </div><!--div formularioVenta -->
+                
+                <?php
+                    if(trim($imagenes[1]) != null ){
+                ?>
                 <a class="btn btn-info" href="http://xcom.ddns.net/semillas/PublicTempStorage/multimedia/<?php echo trim($imagenes[1]); ?>">Ver imagen</a>
+                <?php
+                    }
+                ?>
                 <?php if($_SESSION['perfil'] == 2) { ?>
                 <button id="modificar" class="btn btn-success">Modificar</button>
                 <?php } ?>

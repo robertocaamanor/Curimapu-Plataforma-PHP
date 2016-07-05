@@ -25,7 +25,7 @@
     $objSheet->setCellValue('R1', 'Recomendaciones');
 
         $numero=1;
-        $can=mssql_query("select fv.FormularioVenta_fecha as fecha, 
+        $can=mssql_query("select fv.FormularioVentafecha as fecha, 
             fv.FormularioVenta_Supsiembre as superficiesiembra,
             fv.FormularioVenta_intSiembraTota as intencionsiembra,
             fv.FormularioVenta_intSiembraCuri as intencionsiembraanterior, 
@@ -42,11 +42,11 @@
             a.Agricultorr_Telefono as fono, 
             a.Agricultorr_ubicacion as ubicacion, 
             a.Agricultorr_Contacto as contacto,
-            fv.FormularioVenta_Variedad as variedad,
-            fv.Especies_id as Especie,
-            e.Especies_nombre as nombreespecie
-            from FormularioVenta fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Especies as e on e.Especies_id = fv.Especies_id
-            order by fv.FormularioVenta_fecha desc", $conexion);
+            fv.FormularioVentaVariedad as variedad,
+            fv.Esppecieid as Especie,
+            e.Esppecienombre as nombreespecie
+            from FormularioVenta fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Esppecie as e on e.Esppecieid = fv.Esppecieid
+            order by fv.FormularioVentafecha desc", $conexion);
         while($dato=mssql_fetch_array($can)){
             $numero++;
             $objSheet->setCellValue('A'.$numero, date_format(new DateTime($dato['fecha']), 'd-m-y') );

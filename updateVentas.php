@@ -16,7 +16,7 @@ if (!empty($_POST)) {
             FormularioVenta_obsv='".$_POST['comentarios']."',
             FormularioVenta_recomendacione='".$_POST['recomendaciones']."',
             FormularioVenta_FechaMod = GETDATE()
-            where FormularioVenta_id='".$_POST['formularioId']."'";
+            where FormularioVentaid='".$_POST['formularioId']."'";
 
 
     $recurso = mssql_query($sql, $con);

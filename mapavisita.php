@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['email'])) {
+if((!isset($_SESSION['email'])) || ($_SESSION['perfil'] == 3)) {
 
     echo "No tienes permiso para entrar a esta pagina";
 } else {
@@ -45,116 +45,9 @@ else{
 <div id="map"></div>
 <br>
 <div class="sitio-principal">
-<ul class="nav nav-tabs">
-    <li class="active"><a class="tablas" data-toggle="tab" href="#home">Fecha y agricultor</a></li>
-    <li><a class="tablas" data-toggle="tab" href="#menu1">Fecha y vendedor</a></li>
-  </ul>
 
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <form class="form-inline" action="mapafechavisitaagricultor.php" method="POST">
-        <div class="formulario">
-          <div class="form-group">
-            <label for="exampleInputName2">Desde</label>
-            <div class="input-group">    
-            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-              <input type="text" class="form-control" id="daterange3" name="inicio" placeholder="Buscar fecha..."></div>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail2">Hasta</label>
-            <div class="input-group">    
-            <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-              <input type="text" class="form-control" id="daterange4" name="final" placeholder="Buscar fecha..."></div>
-          </div>
-        </div>
-        <div class="formulario">
-          <div class="form-group">
-            <label for="exampleInputEmail2">Agricultor</label>
-            <div class="input-group">    
-             <?php
-                                $sql = mssql_query("select * from Agricultorr order by Agricultorr_nombre");
+<?php include 'includes/buscadormapavisita.php'; ?>
 
-                                // Verifica que te llegaron datos de respuesta:
-                                if (mssql_num_rows($sql) > 0)
-                                {
-                                  // Recoge los datos recibidos. 
-                                  // Puedes mostrarlos o guardarlos en un arreglo para posterior uso...
-
-                                  // Yo he elegido mostrarlos directamente en el select:
-                                  echo"<select name='busquedaagricultor' class='form-control'>\n";
-                                  
-                                  // Aquí recorres los datos recibidos:
-                                  while ($temp = mssql_fetch_array($sql))
-                                  {
-                                    print" <option value='".$temp["Agricultorr_nombre"]."'>".$temp["Agricultorr_nombre"]."</option>\n";
-                                  }
-
-                                  echo"  </select>\n";
-                                }
-                                else
-                                {  echo"No hay datos";  }
-
-                                // Cierras la consulta
-                                mssql_free_result($sql);  
-                            ?>
-              </div>  
-              <button type="submit" class="btn btn-default">Buscar</button>      
-       </div>
-              
-          
-       </div>    
-      </form>
-</div>
- <div id="menu1" class="tab-pane fade">
-      <form class="formulario form-inline" action="mapafechavisita.php" method="POST">
-        <div class="form-group">
-          <label for="exampleInputName2">Desde</label>
-          <div class="input-group">    
-          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-            <input type="text" class="form-control" id="daterange1" name="inicio" placeholder="Buscar fecha..."></div>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail2">Hasta</label>
-          <div class="input-group">    
-          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-            <input type="text" class="form-control" id="daterange2" name="final" placeholder="Buscar fecha..."></div>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail2">Vendedor</label>
-          <div class="input-group">    
-         <?php
-                $sql = mssql_query("select * from [gam].[User]");
-
-                // Verifica que te llegaron datos de respuesta:
-                if (mssql_num_rows($sql) > 0)
-                {
-                  // Recoge los datos recibidos. 
-                  // Puedes mostrarlos o guardarlos en un arreglo para posterior uso...
-
-                  // Yo he elegido mostrarlos directamente en el select:
-                  echo"<select name='busquedavendedor' class='form-control'>\n";
-                  
-                  // Aquí recorres los datos recibidos:
-                  while ($temp = mssql_fetch_array($sql))
-                  {
-                    print" <option value='".$temp["UserNameSpace"]."'>".$temp["UserFirstName"]." ".$temp["UserLastName"]."</option>\n";
-                  }
-
-                  echo"  </select>\n";
-                }
-                else
-                {  echo"No hay datos";  }
-
-                // Cierras la consulta
-                mssql_free_result($sql);  
-            ?>
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-        </div>
-        
-      </form>
-    </div>
-  </div>
 <hr/>
    <?php 
       $hoy = date( "Y-m-d" );

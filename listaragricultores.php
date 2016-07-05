@@ -1,7 +1,7 @@
 <?php 
 session_start(); 
 
-  if(!isset($_SESSION['email'])) 
+  if((!isset($_SESSION['email'])) || ($_SESSION['perfil'] != 2)) 
   { 
 
     echo "No tienes permiso para entrar a esta pagina"; 
@@ -46,6 +46,7 @@ include 'src/functions/dbfunctions.php';
               <div class="grupo">
                   <div class="cuerpo-principal">
                       <h4 class="list-group-item-heading"><?php echo $row['Nombre']; ?></h4>
+                      <p>Vendedor app: <?php echo $row['Vendedor']; ?></p>
                   </div>
               </div>
             </a>

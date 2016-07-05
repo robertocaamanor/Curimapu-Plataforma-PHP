@@ -13,7 +13,7 @@ if (!empty($_POST)) {
             Observaciones='" . $_POST['observaciones'] . "',
             FormularioVisita_recomendacion='" . $_POST['recomendaciones'] . "',
             FormularioVisita_FechaMod = GETDATE()
-            where FormularioVisita_id='" . $_POST['visitaid'] . "'";
+            where FormularioVisitaid='" . $_POST['visitaid'] . "'";
 
 
     $recurso = mssql_query($sql, $con);

@@ -3,7 +3,6 @@ session_start();
 
   if(!isset($_SESSION['email'])) 
   { 
-
     echo "No tienes permiso para entrar a esta pagina"; 
   } 
   else 
@@ -56,44 +55,26 @@ else{
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             <input type="text" class="form-control" id="daterange2" name="final" placeholder="Buscar fecha..."></div>
         </div>
-        <div id="opcional" class="form-group">
+        <div class="form-group">
           <label for="exampleInputEmail2">Agricultor</label>
-          <div class="input-group">    
-         <?php
-                $sql = mssql_query("select * from agricultorr order by Agricultorr_nombre");
-
-                // Verifica que te llegaron datos de respuesta:
-                if (mssql_num_rows($sql) > 0)
-                {
-                  // Recoge los datos recibidos. 
-                  // Puedes mostrarlos o guardarlos en un arreglo para posterior uso...
-
-                  // Yo he elegido mostrarlos directamente en el select:
-                  echo"<select name='busquedaagricultor' class='form-control'>\n";
-                  
-                  // Aquí recorres los datos recibidos:
-                  while ($temp = mssql_fetch_array($sql))
-                  {
-                    print" <option value='".$temp["Agricultorr_nombre"]."'>".$temp["Agricultorr_nombre"]."</option>\n";
-                  }
-
-                  echo"  </select>\n";
-                }
-                else
-                {  echo"No hay datos";  }
-
-                // Cierras la consulta
-                mssql_free_result($sql);  
-            ?>
+          <div class="input-group">  
+          <?php
+            $sql = "select Agricultorr_nombre, UserID from Agricultorr order by Agricultorr_nombre";
+            $res = mssql_query($sql);
+            $arreglo_php = array();
+            if(mssql_num_rows($res)==0)
+               array_push($arreglo_php, "No hay datos");
+            else{
+              while($listaagricultores = mssql_fetch_array($res)){
+                $agricultores = $listaagricultores["Agricultorr_nombre"];
+                array_push($arreglo_php, $agricultores);
+              }
+            }
+          ?>  
+          <input type="text" id="buscaragricultor" name="busquedaagricultor" class="form-control" />
         </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Buscar tambien con agricultor
-          </label>
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-        </div>
-        
+        <button type="submit" class="btn btn-default">Buscar</button>       
+        </div>         
       </form>
     </div>
     <div id="menu1" class="tab-pane fade">
@@ -110,44 +91,28 @@ else{
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
             <input type="text" class="form-control" id="daterange4" name="final" placeholder="Buscar fecha..."></div>
         </div>
-        <div class="form-group">
+        <div id="opcional2" class="form-group">
           <label for="exampleInputEmail2">Vendedor</label>
           <div class="input-group">    
-         <?php
-                $sql = mssql_query("select * from [gam].[User]");
-
-                // Verifica que te llegaron datos de respuesta:
-                if (mssql_num_rows($sql) > 0)
-                {
-                  // Recoge los datos recibidos. 
-                  // Puedes mostrarlos o guardarlos en un arreglo para posterior uso...
-
-                  // Yo he elegido mostrarlos directamente en el select:
-                  echo"<select name='busquedavendedor' class='form-control'>\n";
-                  
-                  // Aquí recorres los datos recibidos:
-                  while ($temp = mssql_fetch_array($sql))
-                  {
-                    print" <option value='".$temp["UserNameSpace"]."'>".$temp["UserFirstName"]." ".$temp["UserLastName"]."</option>\n";
-                  }
-
-                  echo"  </select>\n";
-                }
-                else
-                {  echo"No hay datos";  }
-
-                // Cierras la consulta
-                mssql_free_result($sql);  
-            ?>
+        <?php
+            $sql = "select UserFirstName, UserLastName from [gam].[User] order by UserFirstName";
+            $res = mssql_query($sql);
+            $arreglo_php1 = array();
+            if(mssql_num_rows($res)==0)
+               array_push($arreglo_php1, "No hay datos");
+            else{
+              while($vendedores = mssql_fetch_array($res)){
+                $nombre = $vendedores["UserFirstName"];
+                $apellido = $vendedores["UserLastName"];
+                $nombrecompleto = $nombre . " " . $apellido;
+                array_push($arreglo_php1, $nombrecompleto);
+              }
+            }
+          ?>  
+          <input type="text" id="buscarvendedor" name="busquedavendedor" class="form-control" />
         </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Buscar tambien con vendedor
-          </label>
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-        </div>
-        
+        <button type="submit" class="btn btn-default">Buscar</button>   
+      </div>   
       </form>
     </div>
   </div>
@@ -222,4 +187,25 @@ else{
       cerrar($conn) ?>
   </div>
 </div>
+
+    <script>
+  $(function(){
+    var autocompletar = new Array();
+    <?php //Esto es un poco de php para obtener lo que necesitamos
+     for($p = 0;$p < count($arreglo_php); $p++){ //usamos count para saber cuantos elementos hay ?>
+       autocompletar.push('<?php echo $arreglo_php[$p]; ?>');
+     <?php } ?>
+     $("#buscaragricultor").autocomplete({ //Usamos el ID de la caja de texto donde lo queremos
+       source: autocompletar //Le decimos que nuestra fuente es el arreglo
+     });
+     var autocompletar1 = new Array();
+     <?php //Esto es un poco de php para obtener lo que necesitamos
+     for($p = 0;$p < count($arreglo_php1); $p++){ //usamos count para saber cuantos elementos hay ?>
+       autocompletar1.push('<?php echo $arreglo_php1[$p]; ?>');
+     <?php } ?>
+     $("#buscarvendedor").autocomplete({ //Usamos el ID de la caja de texto donde lo queremos
+       source: autocompletar1 //Le decimos que nuestra fuente es el arreglo
+     });
+  });
+</script>
 <?php include 'includes/footer.php'; } ?>

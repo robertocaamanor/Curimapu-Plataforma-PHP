@@ -2,10 +2,10 @@
 
 	//$con = ConnectDB();
 	$email = $_POST['email'];
-	$password = $_POST['password'];
+	$password = md5($_POST['password']);
 	$perfilid = $_POST['perfil'];
 	$con=mssql_connect("xcom.ddns.net", "sa", "jYcC5DLt");
-	mssql_select_db("semillasr4", $con);
+	mssql_select_db("SemillasCurimapuBD", $con);
 
 	$sql="SELECT * FROM Vendedor WHERE Vendedor_email='".$email."' and Vendedor_pass='".$password."' and PerfilId='".$perfilid."'";
 	$res=mssql_query($sql);
@@ -30,6 +30,7 @@
 	exit;
 	    }
 	    else {echo "Datos incorrectos, por favor intente nuevamente";
+	    echo "<META HTTP-EQUIV='refresh' CONTENT='5; URL=index.php'>"; 
 	    }
 	mssql_free_result($res);
 	mssql_close();

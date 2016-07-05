@@ -23,7 +23,7 @@
     $objSheet->setCellValue('P1', 'Recomendaciones');
 
         $numero=1;
-        $can=mssql_query("select  fv.FormularioVisita_fecha as fechaVisita,
+        $can=mssql_query("select  fv.FormularioVisitafecha as fechaVisita,
             fv.FormularioVisita_estCrecimient as estadocrecimiento,
             fv.FormularioVisita_dSemSiebra as dsemillasiembra,
             fv.FormularioVisita_enferPlagas as enfermedades,
@@ -39,10 +39,10 @@
             a.Agricultorr_Telefono as fono,
             a.Agricultorr_Contacto as contacto,
             a.Agricultorr_ubicacion as ubicacion,
-            fv.Especies_id as Especie,
-            e.Especies_nombre as nombreespecie,
+            fv.Esppecieid as Especie,
+            e.Esppecienombre as nombreespecie,
             fv.FormularioVisita_Variedad as variedad
-            from FormularioVisita fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Especies as e on e.Especies_id = fv.Especies_id",  $conexion);
+            from FormularioVisita fv inner join Agricultorr as a on fv.Agricultorr_id =  a.Agricultorr_id inner join [gam].[User] as u on a.UserID = u.UserName inner join Esppecie as e on e.Esppecieid = fv.Esppecieid",  $conexion);
         while($dato=mssql_fetch_array($can)){
             $numero++;
             $objSheet->setCellValue('A'.$numero, date_format(new DateTime($dato['fechaVisita']), 'd-m-y'));

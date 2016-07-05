@@ -1,6 +1,6 @@
 <?php
 include 'src/functions/dbfunctions.php';
-    $conn = connectDB();
+    $conn = ConnectDB();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,7 @@ include 'src/functions/dbfunctions.php';
     </div>
     <div class="form-group">
         <?php
-            $sql = mssql_query("select * from perfiles order by PerfilNombre");
+            $sql = mssql_query("select * from Perfiles order by PerfilNombre");
 
             // Verifica que te llegaron datos de respuesta:
             if (mssql_num_rows($sql) > 0)

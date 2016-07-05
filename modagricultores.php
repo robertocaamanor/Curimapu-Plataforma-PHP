@@ -86,7 +86,7 @@ include 'src/functions/dbfunctions.php';
                                         if ($row['Vendedor'] == $arreglo['UserName']) $sel = "selected";
                                         ?>
                                         <option
-                                            value="<?php echo $arreglo['UserName'] ?>"<?= $sel ?>><?php echo $arreglo['UserFirstName']." ".$arreglo['UserLastName']; ?></option>
+                                            value="<?php echo $arreglo['UserName'] ?>" <?= $sel ?>><?php echo $arreglo['UserFirstName']." ".$arreglo['UserLastName']; ?></option>
                                     <?php } ?>
                                 </select>
                         </div>
