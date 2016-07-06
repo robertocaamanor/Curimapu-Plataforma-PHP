@@ -1,9 +1,9 @@
 <?php 
 	include 'src/functions/dbfunctions.php';
-	include 'includes/header.php';
 	$con=mssql_connect("xcom.ddns.net", "sa", "jYcC5DLt");
 	mssql_select_db("SemillasCurimapuBD", $con);
 	if(!empty($_POST)){
+
  
 		$nombre=$_POST['nombrevendedor'];
 		$telefono=$_POST['telefono'];
@@ -11,6 +11,13 @@
 		$email=$_POST['email'];
 		$password=md5($_POST['password']);
 		$perfilid=$_POST['perfil'];
+		$nuevo_email = mssql_query("SELECT Vendedor_email FROM Vendedor WHERE Vendedor_email='".$email."'");
+		if(mssql_num_rows($nuevo_email)>0) 
+		{ 
+			echo "La direccion de e-mail ya esta registrada<br><br>
+			<META HTTP-EQUIV='refresh' CONTENT='5; URL=nuevovendedor.php'> 
+			"; 
+		} else {
 		$sql= "INSERT into Vendedor(Vendedor_nombre, Vendedor_fono, Vendedor_rut, Vendedor_email, Vendedor_pass, PerfilId)values('$nombre', '$telefono', '$rut', '$email', '$password', '$perfilid')";
 		 
 		//Te faltaba esta linea
@@ -28,6 +35,6 @@
     	echo "<META HTTP-EQUIV='refresh' CONTENT='5; URL=nuevovendedor.php'>";
 	}
 
-	include 'includes/footer.php';
+	}
 
  ?>
