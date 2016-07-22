@@ -12,13 +12,13 @@
     $objSheet->setCellValue('E1', 'Contacto');
     $objSheet->setCellValue('F1', 'Comuna');
     $objSheet->setCellValue('G1', 'Teléfono');
-    $objSheet->setCellValue('H1', 'Email' );
+    $objSheet->setCellValue('H1', 'E-mail' );
     $objSheet->setCellValue('I1', 'Superficie Sembrado Temporada Anterior');
-    $objSheet->setCellValue('J1', 'Intencion de siembra total');
-    $objSheet->setCellValue('K1', 'Intencion de siembra Curimapu');
+    $objSheet->setCellValue('J1', 'Intención de siembra total');
+    $objSheet->setCellValue('K1', 'Intención de siembra Curimapu');
     $objSheet->setCellValue('L1', 'Rendimiento Temporada Anterior');
-    $objSheet->setCellValue('M1', 'Hibridos temporada anterior');
-    $objSheet->setCellValue('N1', 'Hibridos externos temporada anterior');
+    $objSheet->setCellValue('M1', 'Híbridos temporada anterior');
+    $objSheet->setCellValue('N1', 'Híbridos externos temporada anterior');
     $objSheet->setCellValue('O1', 'Hectareas Riego');
     $objSheet->setCellValue('P1', 'Hectareas Secano');
     $objSheet->setCellValue('Q1', 'Observaciones');
@@ -88,7 +88,13 @@
     $objXLS->getActiveSheet()->getColumnDimension("Q")->setAutoSize(true);
     $objXLS->getActiveSheet()->getColumnDimension("R")->setAutoSize(true);
     $objXLS->getActiveSheet()->setTitle('VENTAS');
+    $objXLS->getActiveSheet()->getStyle('A1:R1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+    $objXLS->getActiveSheet()->getStyle('A1:R1')->getFill()->getStartColor()->setARGB('FCFF33');
+    // Add some data
+    $objXLS->getActiveSheet()->getStyle("A1:R1")->getFont()->setBold(true);
+    $objXLS->getActiveSheet()->getStyle('A1:R1')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
     $objXLS->setActiveSheetIndex(0);
+
     header('Content-Type: application/vnd.ms-excel');
     header('Content-Disposition: attachment;filename="listadoventas.xls"');
     header('Cache-Control: max-age=0');

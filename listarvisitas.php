@@ -150,7 +150,7 @@ else{
                           <h4 class="list-group-item-heading">Agricultor: <?php echo $row['agricultor']; ?></h4>
                           <p class="list-group-item-text"><b>Vendedor: <?php echo $row['PrimerNombre']." ".$row['SegundoNombre']; ?></b></p>
                           <p class="list-group-item-text"><b>Especie: <?php echo $row['nombreespecie']; ?></b></p>
-                          <p class="list-group-item-text"><b>Ubicacion: <?php echo $row['Ubicacion']; ?></b></p>
+                          <p class="list-group-item-text"><b>Ubicación: <?php echo $row['Ubicacion']; ?></b></p>
                           <p class="list-group-item-text"><b>Observación: <?php echo $row['observacion']; ?></b></p>
                       </div>
                   </div>
@@ -179,7 +179,7 @@ else{
                           <h4 class="list-group-item-heading">Agricultor: <?php echo $row['agricultor']; ?></h4>
                           <p class="list-group-item-text"><b>Vendedor: <?php echo $row['PrimerNombre']." ".$row['SegundoNombre']; ?></b></p>
                           <p class="list-group-item-text"><b>Especie: <?php echo $row['nombreespecie']; ?></b></p>
-                          <p class="list-group-item-text"><b>Ubicacion: <?php echo $row['Ubicacion']; ?></b></p>
+                          <p class="list-group-item-text"><b>Ubicación: <?php echo $row['Ubicacion']; ?></b></p>
                           <p class="list-group-item-text"><b>Observación: <?php echo $row['observacion']; ?></b></p>
                       </div>
                   </div>

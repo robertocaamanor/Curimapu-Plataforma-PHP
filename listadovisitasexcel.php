@@ -11,13 +11,13 @@
     $objSheet->setCellValue('D1', 'Variedad');
     $objSheet->setCellValue('E1', 'Contacto');
     $objSheet->setCellValue('F1', 'Comuna');
-    $objSheet->setCellValue('G1', 'Telefono');
+    $objSheet->setCellValue('G1', 'Teléfono');
     $objSheet->setCellValue('H1', 'E-mail');
     $objSheet->setCellValue('I1', 'Estado de Crecimiento');
     $objSheet->setCellValue('J1', 'Enfermedades y Plagas');
     $objSheet->setCellValue('K1', 'Malezas');
     $objSheet->setCellValue('L1', 'Humedad');
-    $objSheet->setCellValue('M1', 'Poblacion');
+    $objSheet->setCellValue('M1', 'Población');
     $objSheet->setCellValue('N1', 'Dosis de Semilla a la Siembra');
     $objSheet->setCellValue('O1', 'Observaciones');
     $objSheet->setCellValue('P1', 'Recomendaciones');
@@ -80,7 +80,13 @@
     $objXLS->getActiveSheet()->getColumnDimension("O")->setAutoSize(true);
     $objXLS->getActiveSheet()->getColumnDimension("P")->setAutoSize(true);
     $objXLS->getActiveSheet()->setTitle('VISITAS');
+    $objXLS->getActiveSheet()->getStyle('A1:P1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+    $objXLS->getActiveSheet()->getStyle('A1:P1')->getFill()->getStartColor()->setARGB('FCFF33');
+    // Add some data
+    $objXLS->getActiveSheet()->getStyle("A1:P1")->getFont()->setBold(true);
+    $objXLS->getActiveSheet()->getStyle('A1:P1')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
     $objXLS->setActiveSheetIndex(0);
+
     header('Content-Type: application/vnd.ms-excel');
     header('Content-Disposition: attachment;filename="listadovisitas.xls"');
     header('Cache-Control: max-age=0');

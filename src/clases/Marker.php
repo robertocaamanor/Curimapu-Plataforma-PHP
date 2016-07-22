@@ -420,7 +420,7 @@ class Marker
         $nombreagricultorvisita = $_POST['busquedaagricultor'];
         try {
             $sql = ("select FormularioVisitaFecha as Fecha,
-                    FormularioVisitaid as Id,
+                    FormularioVisitaId as Id,
                     Agricultorr.Agricultorr_nombre as AgricultorNombre,
                     Agricultorr.Agricultorr_ubicacion as Ubicacion,
                     FormularioVisita.FormularioVisita_posicion as latlng

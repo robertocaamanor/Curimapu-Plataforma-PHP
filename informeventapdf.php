@@ -1,5 +1,4 @@
 <?php
-
 include 'src/php2pdf/class.ezpdf.php';
 include('src/php2pdf/class.backgroundpdf.php');
 include 'src/functions/dbfunctions.php';
@@ -50,5 +49,9 @@ $pdf->ezText("\nRecomendaciones:\n".utf8_decode($row['recomendaciones']),12,arra
 
 ob_end_clean();
 $pdf->ezStream();
+$documento_pdf = $pdf->ezOutput();
+$fichero = fopen('pdfventas/informeventa'.$id.'.pdf','wb');
+fwrite ($fichero, $documento_pdf);
+fclose ($fichero);
 
 ?>

@@ -100,6 +100,8 @@
             </ul>
         </div>
         <?php } ?>
+        <li><a href="correo.php"><span class="glyphicon glyphicon-envelope"></span> Correo Ventas</a></li>
+        <li><a href="correovisita.php"><span class="glyphicon glyphicon-envelope"></span> Correo Visita</a></li>
         <li><a href="cambiarpassword.php"><span class="glyphicon glyphicon-pencil"></span> Cambiar contraseña</a></li>
         <li><a href="logout.php"><span class="glyphicon glyphicon-exclamation-sign"></span> Salir</a></li>
     </ul>
